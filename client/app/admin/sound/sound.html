@@ -1,0 +1,267 @@
+<style>
+  .grid {
+    width: 300px;
+    height: 500px;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  .delete-item {
+    float: right;
+    margin-right: 2px;
+    color: #fff;
+    padding: 2px 6px;
+    background-color: #FC6A6A;
+    border-radius: 100%;
+  }
+
+</style>
+<div ng-controller="SoundCtrl">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class="thescent-header mdl-layout__header mdl-layout__header--waterfall">
+      <div class="mdl-layout__header-row">
+          <span class="thescent-title mdl-layout-title">
+           <a href="/admin"><img class="thescent-logo-image" src="assets/images/logo_2015_black.png"></a>
+          </span>
+        <div class="thescent-header-spacer mdl-layout-spacer"></div>
+        <div class="thescent-navigation-container">
+          <nav class="thescent-navigation mdl-navigation">
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/perfume">perfume</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/texture">texture</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/place">place</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/color">color</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/taste">taste</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/sound">sound</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/olfactory">olfactory</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/wake">wake</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/gender">gender</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="thescent-content mdl-layout__content">
+      <a name="top"></a>
+      <div class="thescent-be-together-section mdl-typography--text-center">
+        <div class="thescent-font thescent-slogan">manage sound</div>
+        <br/>
+        <button
+          style="background: #7F8FA6"
+          class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" ng-click="gotolevel()">
+          level
+        </button>
+        <div class="thescent-font thescent-sub-slogan">
+          <div class="thescent-card-container mdl-grid">
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">list sound</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div id="soundGrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection class="grid"></div>
+              <div ng-if='columnChanged'>
+                Column Visibility Changed - name: {{ columnChanged.name }} visible: {{ columnChanged.visible }}
+              </div>
+            </span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+               <div class="mdl-card__media">
+
+    </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">detail sound</h4>
+              </div>
+              <div ng-repeat="sound in mySelections">
+	                <span class="mdl-typography--font-light mdl-typography--subhead">
+                    <br/>
+	                  <b>name :</b>{{sound.name}}
+	                  <br/>
+	                  <br/>
+	                  <b>value :</b>{{sound.value}}
+                    <br/>
+	                  <br/>
+                    <div ng-repeat="level in sound.levels">
+                      <b>level :</b> {{level.title}}
+                    </div>
+                    <br/>
+                    <b>period created :</b>{{sound.period_created | date:'shortDate'}}
+                  </span>
+                <div class="mdl-card__menu">
+                  <button
+                  class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                  ng-click="removeSound(sound._id)">
+                  <i class="material-icons">delete</i>
+                </button>
+              </div>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">adding sound</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div ng-form="soundAddForm">
+                <div class="mdl-tooltip" for="txt-sound-add-name">
+                      the name sound
+                  </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input
+                    class="mdl-textfield__input"
+                    type="text"
+                    id="txt-sound-add-name"
+                    ng-model="sound.name"
+                    ng-minlength="5"
+                    ng-maxlength="30"
+                    required/>
+                  <label class="mdl-textfield__label" for="txt-sound-add-name">name ...</label>
+                </div>
+                  <div class="mdl-tooltip" for="txt-sound-add-value">
+                      the value sound
+                  </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input
+                    class="mdl-textfield__input"
+                    type="text"
+                    id="txt-sound-add-value"
+                    ng-model="sound.value"
+                    ng-minlength="5"
+                    ng-maxlength="30"
+                    required/>
+                  <label class="mdl-textfield__label" for="txt-sound-add-value">value ...</label>
+                </div>
+                <br/>
+                <div class="mdl-tooltip" for="cmb-add-sound-level">
+                  select the sound level
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <select id="cmb-add-sound-level"
+                          ng-model='level'
+                          required ng-options='level.value as level.name for level in levelDataSource'>
+
+                  </select>
+                  <label class="mdl-textfield__label" for="cmb-add-sound-level">level</label>
+                </div>
+                <br/>
+                <br/>
+                <button
+                  id="bnt-add-level"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addItemAddLevel()">
+                  add
+                </button>
+                <br/>
+                <div class="mdl-tooltip" for="txt-sound-add-level">
+                  the sound level
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <ul class="nav">
+                    <input class="mdl-textfield__input" type="text" id="txt-sound-add-level" ng-model="level"/>
+                    <label class="mdl-textfield__label" for="txt-sound-add-level">level ...</label>
+                    <li ng-repeat="itemAddLevel in itemsAddLevel.data" id="itemAddLevel{{itemAddLevel.id}}">
+                      <div>
+                        <h5>
+                          {{itemAddLevel.title}}
+                          <a ng-click="deleteItemAddLevel($index)" class="delete-item">x</a>
+                        </h5>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mdl-tooltip" for="cmb-add-sound-level">
+                  select the level value
+                </div>
+                <br/>
+                <div class="mdl-tooltip" for="bnt-add-add">
+                      the sound level
+                  </div>
+                <button
+                        id="bnt-add-add"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                        ng-click="addSound(soundAddForm)">
+                  add
+                </button>
+                  <div class="mdl-tooltip" for="bnt-add-add">
+                      the cancel sound level
+                  </div>
+                <button
+                        id="bnt-add-cancel"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                        ng-click="clearSound()">
+                  cancel
+                </button>
+              </div>
+            </span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">edit sound</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div ng-repeat="sound in mySelections">
+                <div ng-form="soundEditForm">
+                  <div class="mdl-tooltip" for="txt-sound-edit-name">
+                    the name sound
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                    <input
+                      class="mdl-textfield__input"
+                      type="text"
+                      id="txt-sound-edit-name"
+                      ng-model="sound.name"/>
+                    <label class="mdl-textfield__label" for="txt-sound-edit-name">name ...</label>
+                  </div>
+                  <div class="mdl-tooltip" for="txt-sound-edit-value">
+                    the value sound
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                    <input
+                      class="mdl-textfield__input"
+                      type="text"
+                      id="txt-sound-edit-value"
+                      ng-model="sound.value"/>
+                    <label class="mdl-textfield__label" for="txt-sound-edit-value">value ...</label>
+                  </div>
+                  <br/>
+                  <div class="mdl-tooltip" for="bnt-edit-add">
+                    the sound level
+                  </div>
+                  <button
+                    id="bnt-edit-add"
+                    style="background: #7F8FA6"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                    ng-click="updateSound(sound)">
+                    update
+                  </button>
+                </div>
+              </div>
+            </span>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="/logout" target="_self" id="view-source"
+     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Logout</a>
+
+</div>

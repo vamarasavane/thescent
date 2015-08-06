@@ -1,0 +1,263 @@
+<style>
+  .grid {
+    width: 300px;
+    height: 500px;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  .delete-item {
+    float: right;
+    margin-right: 2px;
+    color: #fff;
+    padding: 2px 6px;
+    background-color: #FC6A6A;
+    border-radius: 100%;
+  }
+
+</style>
+<div ng-controller="PlaceCtrl">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class="thescent-header mdl-layout__header mdl-layout__header--waterfall">
+      <div class="mdl-layout__header-row">
+          <span class="thescent-title mdl-layout-title">
+           <a href="/admin"><img class="thescent-logo-image" src="assets/images/logo_2015_black.png"></a>
+          </span>
+        <div class="thescent-header-spacer mdl-layout-spacer"></div>
+        <div class="thescent-navigation-container">
+          <nav class="thescent-navigation mdl-navigation">
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/perfume">perfume</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/texture">texture</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/place">place</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/color">color</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/taste">taste</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/sound">sound</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/olfactory">olfactory</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/wake">wake</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/gender">gender</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="thescent-content mdl-layout__content">
+      <a name="top"></a>
+      <div class="thescent-be-together-section mdl-typography--text-center">
+        <div class="thescent-font thescent-slogan">manage place</div>
+        <br/>
+        <button
+          style="background: #7F8FA6"
+          class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" ng-click="gotolight()">
+          light
+        </button><div class="thescent-font thescent-sub-slogan">
+          <div class="thescent-card-container mdl-grid">
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">list place</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div id="placeGrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection class="grid"></div>
+              <div ng-if='columnChanged'>
+                Column Visibility Changed - name: {{ columnChanged.name }} visible: {{ columnChanged.visible }}
+              </div>
+            </span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">detail place</h4>
+              </div>
+              <div ng-repeat="place in mySelections">
+	                <span class="mdl-typography--font-light mdl-typography--subhead">
+	                  <br/>
+	                  <b>name :</b>{{place.name}}
+	                  <br/>
+	                  <br/>
+	                  <b>value :</b>{{place.value}}
+					           <br/>
+	                  <br/>
+                    <div ng-repeat="light in place.lights">
+                      <b>light :</b> {{light.title}}
+                    </div>
+                    <br/>
+	                  <br/>
+                    <b>period created :</b>{{place.period_created | date:'shortDate'}}
+                  </span>
+                <div class="mdl-card__menu">
+                  <button
+                  class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                  ng-click="removePlace(place._id)">
+                  <i class="material-icons">delete</i>
+                </button>
+              </div>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">adding place</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div ng-form="placeAddForm">
+                <div class="mdl-tooltip" for="txt-add-place-name">
+                  the place name
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input class="mdl-textfield__input"
+                         type="text" id="txt-add-place-name"
+                         ng-model="place.name"
+                         ng-minlength="3"
+                         ng-maxlength="30"
+                         required/>
+                  <label class="mdl-textfield__label" for="txt-add-place-name">name ...</label>
+                </div>
+                <div class="mdl-tooltip" for="txt-add-place-value">
+                  the place value
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input class="mdl-textfield__input"
+                         type="text"
+                         id="txt-add-place-value"
+                         ng-model="place.value"
+                         ng-minlength="3"
+                         ng-maxlength="30"
+                         required/>
+                  <label class="mdl-textfield__label" for="txt-add-place-name">value ...</label>
+                </div>
+                <br/>
+                <div class="mdl-tooltip" for="cmb-add-textute-light">
+                  select light
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <select id="cmb-add-light-value"
+                          ng-model='light'
+                          required ng-options='light.value as light.name for light in lightDataSource'>
+
+                  </select>
+                  <label class="mdl-textfield__label" for="cmb-add-light-value">light</label>
+                </div>
+                <br/>
+                <div class="mdl-tooltip" for="txt-add-place-light">
+                  the light value
+                </div>
+                <br/>
+                <button
+                  id="bnt-add-light"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addItemAddLight()">
+                  add
+                </button>
+                <br/>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <ul class="nav">
+                    <input class="mdl-textfield__input" type="text" id="txt-add-place-light" ng-model="light" />
+                    <label class="mdl-textfield__label" for="txt-add-place-light">light ...</label>
+                    <li ng-repeat="itemAddLight in itemsAddLight.data" id="itemAddLight{{itemAddLight.id}}">
+                      <div>
+                        <h5>
+                          {{itemAddLight.title}}
+                          <a ng-click="deleteItemAddLight($index)" class="delete-item">x</a>
+                        </h5>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mdl-tooltip" for="cmb-add-light-value">
+                  select the light value
+                </div>
+                <br/>
+                <br/>
+                <div class="mdl-tooltip" for="bnt-add-add">
+                  add the place data
+                </div>
+                <button id="bnt-add-add"
+                        style="background: #7F8FA6"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                        ng-click="addPlace(placeAddForm)"
+                  >
+                  add
+                </button>
+                <div class="mdl-tooltip" for="bnt-add-cancel">
+                  cancel the place form
+                </div>
+                <button id="bnt-add-cancel"
+                        style="background: #7F8FA6"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                        ng-click="clearPlace()"
+                  >
+                  cancel
+                </button>
+              </div>
+            </span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">edit place</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div ng-repeat="place in mySelections">
+                <div ng-form="placeEditForm">
+                  <div class="mdl-tooltip" for="txt-edit-place-name">
+                     the place name
+                   </div>
+                   <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                     <input
+                       class="mdl-textfield__input"
+                       type="text"
+                       id="txt-edit-place-name"
+                       ng-model="place.name"/>
+                     <label class="mdl-textfield__label" for="txt-edit-place-name">name ...</label>
+                   </div>
+                   <div class="mdl-tooltip" for="txt-edit-place-value">
+                     the place value
+                   </div>
+                   <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                     <input
+                       class="mdl-textfield__input"
+                       type="text"
+                       id="txt-edit-place-value"
+                       ng-model="place.value"/>
+                     <label class="mdl-textfield__label" for="txt-edit-place-name">value ...</label>
+                   </div>
+                   <br/>
+                  <br/>
+                   <div class="mdl-tooltip" for="bnt-edit-add">
+                     add the place data
+                   </div>
+                   <button id="bnt-edit-add"
+                           style="background: #7F8FA6"
+                           class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                           ng-click="updatePlace(place)">
+                     update
+                   </button>
+                </div>
+              </div>
+            </span>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="/logout" target="_self" id="view-source"
+     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Logout</a>
+</div>

@@ -1,0 +1,563 @@
+/**
+ * Copyright 2015 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@font-face {
+  font-family: "And Black";
+  src: url("../assets/fonts/myfont-webfont.eot?#iefix") format('embedded-opentype'),
+  url("../assets/fonts/and_black.woff") format('woff'),
+  url("../assets/fonts//and_black.ttf") format('truetype');
+}
+
+body {
+  margin: 0;
+}
+
+
+
+
+
+/* Disable ugly boxes around images in IE10 */
+a img{
+  border: 0px;
+}
+
+::-moz-selection {
+  background-color: #6ab344;
+  color: #fff;
+}
+
+::selection {
+  background-color: #6ab344;
+  color: #fff;
+}
+
+.thescent-search-box .mdl-textfield__input {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.thescent-header .mdl-menu__container {
+  z-index: 50;
+  margin: 0 !important;
+}
+
+
+.mdl-textfield--expandable {
+  width: auto;
+}
+
+.thescent-fab {
+  position: absolute;
+  right: 20%;
+  bottom: -26px;
+  z-index: 3;
+  background: #64ffda !important;
+  color: black !important;
+}
+
+.thescent-mobile-title {
+  display: none !important;
+}
+
+
+.thescent-logo-image {
+  height: 28px;
+  width: 140px;
+}
+
+
+.thescent-header {
+  overflow: visible;
+  background-color: white;
+}
+
+.thescent-header .material-icons {
+  color: #767777 !important;
+}
+
+.thescent-header .mdl-layout__drawer-button {
+  background: transparent;
+  color: #767777;
+}
+
+.thescent-header .mdl-navigation__link {
+  color: #757575;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.thescent-navigation-container {
+  /* Simple hack to make the overflow happen to the left instead... */
+  direction: rtl;
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  width: 500px;
+  -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+  width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+  width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.thescent-navigation {
+  /* ... and now make sure the content is actually LTR */
+  direction: ltr;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  width: 800px;
+}
+
+.thescent-search-box.is-focused ~ .thescent-navigation-container {
+  opacity: 0;
+  width: 100px;
+}
+
+
+.thescent-navigation .mdl-navigation__link {
+  display: inline-block;
+  height: 60px;
+  line-height: 68px;
+  background-color: transparent !important;
+  border-bottom: 4px solid transparent;
+}
+
+.thescent-navigation .mdl-navigation__link:hover {
+  border-bottom: 4px solid #8bc34a;
+}
+
+.thescent-search-box {
+  -webkit-box-ordinal-group: 3;
+  -webkit-order: 2;
+  -ms-flex-order: 2;
+  order: 2;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.thescent-more-button {
+  -webkit-box-ordinal-group: 4;
+  -webkit-order: 3;
+  -ms-flex-order: 3;
+  order: 3;
+}
+
+
+.thescent-drawer {
+  border-right: none;
+}
+
+.thescent-drawer-separator {
+  height: 1px;
+  background-color: #dcdcdc;
+  margin: 8px 0;
+}
+
+.thescent-drawer .mdl-navigation__link.mdl-navigation__link {
+  font-size: 14px;
+  color: #757575;
+}
+
+.thescent-drawer span.mdl-navigation__link.mdl-navigation__link {
+  color: #8bc34a;
+}
+
+.thescent-drawer .mdl-layout-title {
+  position: relative;
+  background: #6ab344;
+  height: 160px;
+}
+
+.thescent-drawer .thescent-logo-image {
+  position: absolute;
+  bottom: 16px;
+}
+
+.thescent-be-together-section {
+  position: relative;
+  height: 800px;
+  width: auto;
+  background-color: #f3f3f3;
+  /*background: url('../assets/images/intro.jpg') center 30% no-repeat;*/
+  background-size: cover;
+}
+
+.thescent-font {
+  font-family: 'And Black', 'Helvetica', 'Arial', sans-serif;
+  line-height: 1;
+  color: #757575;
+  font-weight: 300;
+}
+
+.thescent-font-black {
+  font-family: 'And Black', 'Helvetica', 'Arial', sans-serif;
+  line-height: 1;
+  color: black;
+  font-weight: 300;
+}
+
+.thescent-slogan {
+  font-size: 60px;
+  padding-top: 160px;
+}
+
+.thescent-sub-slogan {
+  font-size: 21px;
+  padding-top: 24px;
+}
+
+.thescent-create-character {
+  font-size: 21px;
+  padding-top: 400px;
+}
+
+.thescent-create-character a {
+  text-decoration: none;
+  color: #767777;
+  font-weight: 300;
+}
+
+.thescent-screen-section {
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 80px;
+}
+
+.thescent-screens {
+  text-align: right;
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.thescent-screen {
+  text-align: center;
+}
+
+.thescent-screen .thescent-link {
+  margin-top: 16px;
+  display: block;
+  z-index: 2;
+}
+
+.thescent-image-link {
+  text-decoration: none;
+}
+
+.thescent-wear {
+  display: inline-block;
+  width: 160px;
+  margin-right: 32px;
+}
+
+.thescent-wear .thescent-screen-image {
+  width: 40%;
+  z-index: 1;
+}
+
+
+.thescent-phone {
+  display: inline-block;
+  width: 64px;
+  margin-right: 48px;
+}
+
+.thescent-phone .thescent-screen-image {
+  width: 100%;
+  z-index: 1;
+}
+
+
+.thescent-tablet {
+  display: inline-block;
+  width: 110px;
+  margin-right: 64px;
+}
+
+.thescent-tablet .thescent-screen-image {
+  width: 100%;
+  z-index: 1;
+}
+
+.thescent-tablet .thescent-link {
+  display: block;
+  z-index: 2;
+}
+
+
+.thescent-tv {
+  display: inline-block;
+  width: 300px;
+  margin-right: 80px;
+}
+
+.thescent-tv .thescent-screen-image {
+  width: 100%;
+  z-index: 1;
+}
+
+
+.thescent-auto {
+  display: inline-block;
+  width: 300px;
+  overflow: hidden;
+}
+
+.thescent-auto .thescent-screen-image {
+  display: block;
+  height: 300px;
+  z-index: 1;
+}
+
+
+.thescent-wear-section {
+  position: relative;
+  /*background: url('../assets/images/intro.jpg') center top no-repeat;*/
+  background-size: cover;
+  height: 800px;
+}
+
+.thescent-wear-band {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-color: #37474f;
+}
+
+.thescent-wear-band-text {
+  max-width: 800px;
+  margin-left: 25%;
+  padding: 24px;
+  text-align: left;
+  color: white;
+}
+
+.thescent-wear-band-text p {
+  padding-top: 8px;
+}
+
+.thescent-link {
+  text-decoration: none;
+  color: #8bc34a !important;
+}
+
+.thescent-link:hover {
+  color: #7cb342 !important;
+}
+
+.thescent-link .material-icons {
+  position: relative;
+  top: 6px;
+}
+
+.thescent-alt-link {
+  text-decoration: none;
+  color: #64ffda !important;
+  font-size: 16px;
+}
+
+.thescent-alt-link:hover {
+  color: #00bfa5 !important;
+}
+
+.thescent-alt-link .material-icons {
+  position: relative;
+  top: 6px;
+}
+
+.thescent-customized-section {
+  text-align: center;
+}
+
+.thescent-customized-section-text {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 80px 16px 0 16px;/**/
+}
+
+.thescent-customized-section-text p {
+  padding-top: 16px;
+}
+
+.thescent-customized-section-image {
+  /*background: url('../assets/images/intro.jpg') center top no-repeat;*/
+  background-size: cover;
+  height: 400px;
+}
+
+.thescent-more-section {
+  padding: 80px 0;
+  max-width: 1044px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.thescent-more-section .thescent-section-title {
+  margin-left: 12px;
+  padding-bottom: 24px;
+}
+
+.thescent-card-container {
+}
+
+.thescent-card-container .mdl-card__media {
+  overflow: hidden;
+  background: transparent;
+}
+
+.thescent-card-container .mdl-card__media img {
+  width: 100%;
+}
+
+.thescent-card-container .mdl-card__title {
+  background: transparent;
+  height: auto;
+}
+
+.thescent-card-container .mdl-card__title-text {
+  color: black;
+  height: auto;
+}
+
+.thescent-card-container .mdl-card__supporting-text {
+  height: auto;
+  color: black;
+  padding-bottom: 48px;
+}
+
+.thescent-card-container .mdl-card__actions {
+  position: absolute;
+  bottom: 0;
+}
+
+.thescent-card-container .mdl-card__actions a {
+  border-top: none;
+  line-height: 32px;
+  font-size: 16px;
+}
+
+.thescent-footer {
+  background-color: #fafafa;
+  position: relative;
+}
+
+.thescent-footer a:hover {
+  color: #8bc34a;
+}
+
+.thescent-footer .mdl-mega-footer--top-section::after {
+  border-bottom: none;
+}
+
+.thescent-footer .mdl-mega-footer--middle-section::after {
+  border-bottom: none;
+}
+
+.thescent-footer .mdl-mega-footer--bottom-section {
+  position: relative;
+}
+
+.thescent-footer .mdl-mega-footer--bottom-section a {
+  margin-right: 2em;
+}
+
+.thescent-footer .mdl-mega-footer--right-section a .material-icons {
+  position: relative;
+  top: 6px;
+}
+
+
+.thescent-link-menu:hover {
+  cursor: pointer;
+}
+
+
+/**** Mobile layout ****/
+@media (max-width: 900px) {
+  .thescent-navigation-container {
+    display: none;
+  }
+
+  .thescent-title {
+    display: none !important;
+  }
+
+  .thescent-mobile-title {
+    display: block !important;
+    position: absolute;
+    left: calc(50% - 70px);
+    top: 12px;
+    -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .thescent-search-box.is-focused ~ .thescent-mobile-title {
+    opacity: 0;
+  }
+
+  .thescent-more-button {
+    display: none;
+  }
+
+  .thescent-search-box.is-focused {
+    width: calc(100% - 48px);
+  }
+
+  .thescent-search-box .mdl-textfield__expandable-holder {
+    width: 100%;
+  }
+
+  .thescent-be-together-section {
+    height: 350px;
+  }
+
+  .thescent-slogan {
+    font-size: 26px;
+    margin: 0 16px;
+    padding-top: 24px;
+  }
+
+  .thescent-sub-slogan {
+    font-size: 16px;
+    margin: 0 16px;
+    padding-top: 8px;
+  }
+
+  .thescent-create-character {
+    padding-top: 200px;
+    font-size: 16px;
+  }
+
+  .thescent-create-character img {
+    height: 12px;
+  }
+
+  .thescent-fab {
+    display: none;
+  }
+
+  .thescent-wear-band-text {
+    margin-left: 0;
+    padding: 16px;
+  }
+
+  .thescent-footer .mdl-mega-footer--bottom-section {
+    display: none;
+  }
+}

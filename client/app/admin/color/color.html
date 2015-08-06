@@ -1,0 +1,219 @@
+<style>
+  .grid {
+    width: 300px;
+    height: 500px;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+
+  .delete-item {
+    float: right;
+    margin-right: 2px;
+    color: #fff;
+    padding: 2px 6px;
+    background-color: #FC6A6A;
+    border-radius: 100%;
+  }
+
+</style>
+<div ng-controller="ColorCtrl">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class="thescent-header mdl-layout__header mdl-layout__header--waterfall">
+      <div class="mdl-layout__header-row">
+          <span class="thescent-title mdl-layout-title">
+           <a href="/admin"><img class="thescent-logo-image" src="assets/images/logo_2015_black.png"></a>
+          </span>
+
+        <div class="thescent-header-spacer mdl-layout-spacer"></div>
+        <div class="thescent-navigation-container">
+          <nav class="thescent-navigation mdl-navigation">
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/perfume">perfume</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/texture">texture</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/place">place</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/color">color</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/taste">taste</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/sound">sound</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/olfactory">olfactory</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/wake">wake</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/gender">gender</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="thescent-content mdl-layout__content">
+      <a name="top"></a>
+
+      <div class="thescent-be-together-section mdl-typography--text-center">
+        <div class="thescent-font thescent-slogan">manage color</div>
+        <div class="thescent-font thescent-sub-slogan">
+          <div class="thescent-card-container mdl-grid">
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">list color</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div id="colorGrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection class="grid"></div>
+              <div ng-if='columnChanged'>
+                Column Visibility Changed - name: {{ columnChanged.name }} visible: {{ columnChanged.visible }}
+              </div>
+            </span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">detail color</h4>
+              </div>
+              <div ng-repeat="color in mySelections">
+	                <span class="mdl-typography--font-light mdl-typography--subhead">
+                    <br/>
+	                  <b>name :</b>{{color.name}}
+	                  <br/>
+	                  <br/>
+	                  <b>value :</b>{{color.value}}
+                    <br/>
+	                  <br/>
+                    <b>period created :</b>{{color.period_created | date:'shortDate'}}
+                  </span>
+
+                <div class="mdl-card__menu">
+                  <button
+                    class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                    ng-click="removeColor(color._id)">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">adding color</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div ng-form="colorAddForm">
+                <div class="mdl-tooltip" for="txt-add-color-name">
+                  the name color
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input
+                    name="colorName"
+                    class="mdl-textfield__input"
+                    type="text"
+                    id="txt-add-color-name"
+                    ng-minlength="3"
+                    ng-maxlength="30"
+                    required/>
+                  <label class="mdl-textfield__label" for="txt-add-color-name">name ...</label>
+                </div>
+                <div class="mdl-tooltip" for="txt-add-color-value">
+                  the value color
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input name="colorValue"
+                         class="mdl-textfield__input"
+                         type="text"
+                         id="txt-add-color-value"
+                         ng-model="color.value"
+                         ng-minlength="3"
+                         ng-maxlength="30"
+                         required/>
+                  <label class="mdl-textfield__label" for="txt-add-color-value">value ...</label>
+                </div>
+                <br/>
+
+                <div class="mdl-tooltip" for="bnt-add-add">
+                  the add color data
+                </div>
+                <button
+                  id="bnt-add-add"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addColor(colorAddForm)">
+                  add
+                </button>
+                <div class="mdl-tooltip" for="bnt-add-cancel">
+                  the cancel color form
+                </div>
+                <button
+                  id="bnt-add-cancel"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="clearColor()">
+                  cancel
+                </button>
+              </div>
+            </span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">edit color</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div ng-repeat="color in mySelections">
+                <div ng-form="colorEditForm">
+                  <div class="mdl-tooltip" for="txt-edit-color-name">
+                    the color name
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                    <input
+                      class="mdl-textfield__input"
+                      type="text"
+                      id="txt-edit-color-name"
+                      ng-model="color.name"/>
+                    <label class="mdl-textfield__label" for="txt-edit-color-name">name ...</label>
+                  </div>
+                  <div class="mdl-tooltip" for="txt-edit-color-value">
+                    the color value
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                    <input
+                      class="mdl-textfield__input"
+                      type="text"
+                      id="txt-edit-color-value"
+                      ng-model="color.value"/>
+                    <label class="mdl-textfield__label" for="txt-edit-color-value">value ...</label>
+                  </div>
+                  <br/>
+
+                  <div class="mdl-tooltip" for="bnt-edit-add">
+                    the add color data
+                  </div>
+                  <button
+                    id="bnt-edit-add"
+                    style="background: #7F8FA6"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                    ng-click="updateColor(color)">
+                    update
+                  </button>
+                </div>
+              </div>
+            </span>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="/logout" target="_self" id="view-source"
+     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Logout</a>
+</div>

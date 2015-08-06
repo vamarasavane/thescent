@@ -1,0 +1,799 @@
+<style>
+  .grid {
+    width: 300px;
+    height: 500px;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+
+  .delete-item {
+    float: right;
+    margin-right: 2px;
+    color: #fff;
+    padding: 2px 6px;
+    background-color: #FC6A6A;
+    border-radius: 100%;
+  }
+
+</style>
+
+
+<div ng-controller="AuragramCtrl">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class="thescent-header mdl-layout__header mdl-layout__header--waterfall">
+      <div class="mdl-layout__header-row">
+          <span class="thescent-title mdl-layout-title">
+           <a href="/admin"><img class="thescent-logo-image" src="assets/images/logo_2015_black.png"></a>
+          </span>
+
+        <div class="thescent-header-spacer mdl-layout-spacer"></div>
+        <div class="thescent-navigation-container">
+          <nav class="thescent-navigation mdl-navigation">
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/perfume">perfume</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/auragram">auragram</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/texture">texture</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/place">place</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/color">color</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/taste">taste</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/sound">sound</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/olfactory">olfactory</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/wake">wake</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/gender">gender</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/user">user</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <div class="thescent-content mdl-layout__content">
+      <a name="top"></a>
+
+      <div class="thescent-be-together-section mdl-typography--text-center">
+        <div class="thescent-font thescent-slogan">manage auragram</div>
+        <div class="thescent-font thescent-sub-slogan">
+
+          <div class="thescent-card-container mdl-grid">
+
+
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+
+                <h4 class="mdl-card__title-text">list auragram</h4>
+
+
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+
+
+
+
+
+              <div id="auragramGrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection class="grid"></div>
+
+
+
+              <div ng-if='columnChanged'>
+                Column Visibility Changed - name: {{ columnChanged.name }} visible: {{ columnChanged.visible }}
+              </div>
+
+            </span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+
+
+              <div class="mdl-card__media">
+
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">detail auragram</h4>
+              </div>
+              <div ng-repeat="auragram in mySelections">
+                <img width="250px" height="250px" src="assets/images/video-player.png">
+                <span class="mdl-typography--font-light mdl-typography--subhead">
+                  <br/>
+                  <b>name :</b>{{auragram.name}}
+                  <br/>
+                  <br/>
+                  <b>brand :</b>{{auragram.brand}}
+				          <br/>
+                  <br/>
+                   </span>
+                <accordion close-others="oneAtATime">
+                  <accordion-group is-open="status.open">
+                    <accordion-heading>
+                      experience data <i class="pull-right glyphicon"
+                                         ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                    </accordion-heading>
+                    <b>gender :</b> {{auragram.gender}}
+                    <br/>
+                    <br/>
+
+                    <div ng-repeat="color in auragram.colors">
+                      <b>color :</b> {{color.title}}
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <div ng-repeat="place in auragram.places">
+                      <b>place :</b> {{place.title}}
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <div ng-repeat="light in auragram.lights">
+                      <b>light :</b> {{light.title}}
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <div ng-repeat="taste in auragram.tastes">
+                      <b>taste :</b> {{taste.title}}
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <div ng-repeat="sound in auragram.sounds">
+                      <b>sound :</b> {{sound.title}}
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <div ng-repeat="level in auragram.levels">
+                      <b>level :</b> {{level.title}}
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <div ng-repeat="sensitivity in auragram.sensitivitys">
+                      <b>sensitivity :</b> {{sensitivity.title}}
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <div ng-repeat="densitivity in auragram.densitivitys">
+                      <b>densitivity :</b> {{densitivity.title}}
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <div ng-repeat="olfactory in auragram.olfactorys">
+                      <b>olfactory :</b> {{olfactory.title}}
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <div ng-repeat="wake in auragram.wakes">
+                      <b>wake :</b> {{wake.title}}
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <b>period created :</b> {{auragram.period_created | date:'shortDate'}}
+
+                  </accordion-group>
+                </accordion>
+
+
+                <div class="mdl-card__menu">
+
+                  <button
+                    class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                    ng-click="removeAuragram(auragram._id)">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </div>
+
+              </div>
+
+
+            </div>
+
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+
+                <h4 class="mdl-card__title-text">adding auragram</h4>
+
+
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+
+              <!--Add-->
+
+              <div ng-form="auragramAddForm">
+
+
+                <div class="mdl-tooltip" for="txt-auragram-add-name">
+                  the name auragram
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input class="mdl-textfield__input"
+                         type="text"
+                         id="txt-auragram-add-name"
+                         ng-model="auragram.name"
+                         ng-minlength="3"
+                         ng-maxlength="30"
+                         required/>
+                  <label class="mdl-textfield__label" for="txt-auragram-add-name">name ...</label>
+                </div>
+                <div class="mdl-tooltip" for="txt-auragram-add-brand">
+                  the brand name auragram
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input class="mdl-textfield__input"
+                         type="text"
+                         id="txt-auragram-add-brand"
+                         ng-model="auragram.brand"
+                         ng-minlength="3"
+                         ng-maxlength="30"
+                         required/>
+                  <label class="mdl-textfield__label" for="txt-auragram-add-brand">brand ...</label>
+                </div>
+
+
+                <br/>
+
+                <div class="mdl-tooltip" for="cmb-auragram-gender-drop">
+                  select gender experience
+                </div>
+                <div class="btn-group" dropdown dropdown-append-to-body>
+                  <select id="cmb-auragram-gender-drop"
+                          ng-model='gender'
+                          required ng-options='gender.value as gender.name for gender in genderDataSource'>
+
+                  </select>
+                </div>
+                <br/>
+
+                <div class="mdl-tooltip" for="txt-auragram-add-gender">
+                  the gender experience
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input class="mdl-textfield__input" type="text" id="txt-auragram-add-gender" ng-model="gender"
+                         required/>
+                  <label class="mdl-textfield__label" for="txt-auragram-add-gender">gender...</label>
+                </div>
+                <br/>
+                <!-- Color Experience -->
+                <div class="mdl-tooltip" for="cmb-auragram-color">
+                  select color experience
+                </div>
+                <div class="btn-group" dropdown dropdown-append-to-body>
+                  <select id="cmb-auragram-color"
+                          ng-model='color'
+                          required ng-options='color.value as color.name for color in colorDataSource'>
+
+                  </select>
+                </div>
+                <br/>
+                <br/>
+                <button
+                  id="bnt-add-color"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addItemAddColor()">
+                  add
+                </button>
+                <br/>
+
+                <div class="mdl-tooltip" for="txt-auragram-add-color">
+                  the color experience
+                </div>
+
+                <br/>
+
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <ul class="nav">
+                    <input class="mdl-textfield__input" type="text" id="txt-auragram-add-color" ng-model="color"/>
+                    <label class="mdl-textfield__label" for="txt-auragram-add-color">color ...</label>
+                    <li ng-repeat="itemAddColor in itemsAddColor.data" id="itemAddColor{{itemAddColor.id}}">
+                      <div>
+                        <h5>
+                          {{itemAddColor.title}}
+                          <a ng-click="deleteItemAddColor($index)" class="delete-item">x</a>
+                        </h5>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <br/>
+                <!-- Color Experience -->
+                <!-- Place Experience -->
+                <div class="mdl-tooltip" for="cmb-auragram-add-place">
+                  select place experience
+                </div>
+                <div class="btn-group" dropdown dropdown-append-to-body>
+                  <select id="cmb-auragram-add-place"
+                          ng-model='place'
+                          required ng-options='place.value as place.name for place in placeDataSource'>
+
+                  </select>
+                </div>
+                <br/>
+                <br/>
+                <button
+                  id="bnt-add-place"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addItemAddPlace()">
+                  add
+                </button>
+                <br/>
+
+                <div class="mdl-tooltip" for="txt-auragram-add-place">
+                  the place experience
+                </div>
+                <br/>
+
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <ul class="nav">
+                    <input class="mdl-textfield__input" type="text" id="txt-auragram-add-place" ng-model="place"/>
+                    <label class="mdl-textfield__label" for="txt-auragram-add-place">place ...</label>
+                    <li ng-repeat="itemAddPlace in itemsAddPlace.data" id="itemAddPlace{{itemAddPlace.id}}">
+                      <div>
+                        <h5>
+                          {{itemAddPlace.title}}
+                          <a ng-click="deleteItemAddPlace($index)" class="delete-item">x</a>
+                        </h5>
+
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <br/>
+                <!-- Place Experience -->
+                <!-- olfactory Experience -->
+                <div class="mdl-tooltip" for="cmb-auragram-olfactory">
+                  select olfactory experience
+                </div>
+                <div class="btn-group" dropdown dropdown-append-to-body>
+                  <select id="cmb-auragram-add-olfactory"
+                          ng-model='olfactory'
+                          required ng-options='olfactory.value as olfactory.name for olfactory in olfactoryDataSource'>
+
+                  </select>
+                </div>
+                <br/>
+                <br/>
+                <button
+                  id="bnt-add-olfactory"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addItemAddOlfactory()">
+                  add
+                </button>
+                <br/>
+
+                <div class="mdl-tooltip" for="txt-auragram-add-olfactory">
+                  the olfactory experience
+                </div>
+                <br/>
+
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <ul class="nav">
+                    <input class="mdl-textfield__input" type="text" id="txt-perfum-add-olfactory" ng-model="olfactory"/>
+                    <label class="mdl-textfield__label" for="txt-perfum-add-olfactory">olfactory ...</label>
+                    <li ng-repeat="itemAddOlfactory in itemsAddOlfactory.data"
+                        id="itemAddOlfactory{{itemAddOlfactory.id}}">
+                      <div>
+                        <h5>
+                          {{itemAddOlfactory.title}}
+                          <a ng-click="deleteItemAddOlfactory($index)" class="delete-item">x</a>
+                        </h5>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <br/>
+                <!-- olfactory Experience -->
+                <!-- Light Experience -->
+                <div class="mdl-tooltip" for="cmb-auragram-light">
+                  select light experience
+                </div>
+                <div class="btn-group" dropdown dropdown-append-to-body>
+                  <select id="cmb-auragram-add-light"
+                          ng-model='light'
+                          required ng-options='light.value as light.name for light in lightDataSource'>
+
+                  </select>
+                </div>
+                <br/>
+                <br/>
+                <button
+                  id="bnt-add-light"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addItemAddLight()">
+                  add
+                </button>
+                <br/>
+
+                <div class="mdl-tooltip" for="txt-auragram-add-light">
+                  the light experience
+                </div>
+
+                <br/>
+
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <ul class="nav">
+                    <input class="mdl-textfield__input" type="text" id="txt-auragram-add-light" ng-model="light"/>
+                    <label class="mdl-textfield__label" for="txt-auragram-add-light">light ...</label>
+
+                    <li ng-repeat="itemAddLight in itemsAddLight.data" id="itemAddLight{{itemAddLight.id}}">
+                      <div>
+                        <h5>
+                          {{itemAddLight.title}}
+                          <a ng-click="deleteItemAddLight($index)" class="delete-item">x</a>
+                        </h5>
+
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <!-- Light Experience -->
+                <!-- Taste Experience -->
+                <div class="mdl-tooltip" for="cmb-auragram-color">
+                  select taste experience
+                </div>
+                <div class="btn-group" dropdown dropdown-append-to-body>
+                  <select id="cmb-auragram-add-taste"
+                          ng-model='taste'
+                          required ng-options='taste.value as taste.name for taste in tasteDataSource'>
+
+                  </select>
+                </div>
+                <br/>
+                <br/>
+                <button
+                  id="bnt-add-taste"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addItemAddTaste()">
+                  add
+                </button>
+                <br/>
+
+                <div class="mdl-tooltip" for="txt-perfum-add-color">
+                  the taste experience
+                </div>
+                <br/>
+
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <ul class="nav">
+                    <input class="mdl-textfield__input" type="text" id="txt-perfum-add-taste" ng-model="taste"/>
+                    <label class="mdl-textfield__label" for="txt-perfum-add-taste">taste ...</label>
+                    <li ng-repeat="itemAddTaste in itemsAddTaste.data" id="itemAddTaste{{itemAddTaste.id}}">
+                      <div>
+                        <h5>
+                          {{itemAddTaste.title}}
+                          <a ng-click="deleteItemAddTaste($index)" class="delete-item">x</a>
+                        </h5>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <br/>
+                <!-- Taste Experience -->
+                <!-- Sound Experience -->
+                <div class="mdl-tooltip" for="cmb-auragram-color">
+                  select sound experience
+                </div>
+                <div class="btn-group" dropdown dropdown-append-to-body>
+                  <select id="cmb-auragram-add-sound"
+                          ng-model='sound'
+                          required ng-options='sound.value as sound.name for sound in soundDataSource'>
+                  </select>
+                </div>
+                <br/>
+                <br/>
+                <button
+                  id="bnt-add-sound"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addItemAddSound()">
+                  add
+                </button>
+                <br/>
+
+                <div class="mdl-tooltip" for="txt-auragram-add-color">
+                  the sound experience
+                </div>
+                <br/>
+
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <ul class="nav">
+                    <input class="mdl-textfield__input" type="text" id="txt-auragram-add-sound" ng-model="sound"/>
+                    <label class="mdl-textfield__label" for="txt-auragram-add-sound">sound...</label>
+                    <li ng-repeat="itemAddSound in itemsAddSound.data" id="itemAddSound{{itemAddSound.id}}">
+                      <div>
+                        <h5>
+                          {{itemAddSound.title}}
+                          <a ng-click="deleteItemAddSound($index)" class="delete-item">x</a>
+                        </h5>
+
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <br/>
+                <!-- Sound Experience -->
+                <!-- Level Experience -->
+                <div class="mdl-tooltip" for="cmb-auragram-level">
+                  select level experience
+                </div>
+                <div class="btn-group" dropdown dropdown-append-to-body>
+                  <select id="cmb-auragram-add-level"
+                          ng-model='level'
+                          required ng-options='level.value as level.name for level in levelDataSource'>
+
+                  </select>
+                </div>
+                <br/>
+                <br/>
+                <button
+                  id="bnt-add-level"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addItemAddLevel()">
+                  add
+                </button>
+                <br/>
+
+                <div class="mdl-tooltip" for="txt-auragram-add-level">
+                  the level experience
+                </div>
+                <br/>
+
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <ul class="nav">
+                    <input class="mdl-textfield__input" type="text" id="txt-auragram-add-level" ng-model="level"/>
+                    <label class="mdl-textfield__label" for="txt-auragram-add-level">level...</label>
+                    <li ng-repeat="itemAddLevel in itemsAddLevel.data" id="itemAddLevel{{itemAddLevel.id}}">
+                      <div>
+                        <h5>
+                          {{itemAddLevel.title}}
+                          <a ng-click="deleteItemAddLevel($index)" class="delete-item">x</a>
+                        </h5>
+
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <br/>
+                <!-- Level Experience -->
+                <!-- Sensitivity Experience -->
+                <div class="mdl-tooltip" for="cmb-auragram-color">
+                  select sensitivity experience
+                </div>
+                <div class="btn-group" dropdown dropdown-append-to-body>
+                  <select id="cmb-auragram-add-sensitivity"
+                          ng-model='sensitivity'
+                          required
+                          ng-options='sensitivity.value as sensitivity.name for sensitivity in sensitivityDataSource'>
+
+                  </select>
+                </div>
+                <br/>
+                <br/>
+                <button
+                  id="bnt-add-sensitivity"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addItemAddSensitivity()">
+                  add
+                </button>
+                <br/>
+
+                <div class="mdl-tooltip" for="txt-auragram-add-sensitivity">
+                  the sensitivity experience
+                </div>
+                <br/>
+
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <ul class="nav">
+                    <input class="mdl-textfield__input" type="text" id="txt-auragram-add-sensitivity"
+                           ng-model="sensitivity"/>
+                    <label class="mdl-textfield__label" for="txt-auragram-add-sensitivity">sensitivity ...</label>
+
+                    <li ng-repeat="itemAddSensitivity in itemsAddSensitivity.data"
+                        id="itemAddSensitivity{{itemAddSensitivity.id}}">
+                      <div>
+                        <h5>
+                          {{itemAddSensitivity.title}}
+                          <a ng-click="deleteItemAddSensitivity($index)" class="delete-item">x</a>
+                        </h5>
+
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <br/>
+                <!-- Sensitivity Experience -->
+                <!-- Densitivity Experience -->
+                <div class="mdl-tooltip" for="cmb-auragram-color">
+                  select densitivity experience
+                </div>
+                <div class="btn-group" dropdown dropdown-append-to-body>
+                  <select id="cmb-auragram-add-densitivity"
+                          ng-model='densitivity'
+                          required
+                          ng-options='densitivity.value as densitivity.name for densitivity in densityDataSource'>
+                  </select>
+                </div>
+                <br/>
+                <br/>
+                <button
+                  id="bnt-add-densitivity"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addItemAddDensitivity()">
+                  add
+                </button>
+
+                <br/>
+
+                <div class="mdl-tooltip" for="txt-auragram-add-densitivity">
+                  the densitivity experience
+                </div>
+
+                <br/>
+
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <ul class="nav">
+                    <input class="mdl-textfield__input" type="text" id="txt-auragram-add-densitivity"
+                           ng-model="densitivity"/>
+                    <label class="mdl-textfield__label" for="txt-auragram-add-densitivity">densitivity ...</label>
+                    <li ng-repeat="itemAddDensitivity in itemsAddDensitivity.data"
+                        id="itemAddDensitivity{{itemAddDensitivity.id}}">
+                      <div>
+                        <h5>
+                          {{itemAddDensitivity.title}}
+                          <a ng-click="deleteItemAddDensitivity($index)" class="delete-item">x</a>
+                        </h5>
+
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <br/>
+                <!-- Densitivity Experience -->
+                <!-- Wake Experience -->
+
+                <div class="mdl-tooltip" for="cmb-auragram-wake">
+                  select wake experience
+                </div>
+                <div class="btn-group" dropdown dropdown-append-to-body>
+                  <select id="cmb-auragram-add-wake"
+                          ng-model='wake'
+                          required ng-options='wake.value as wake.name for wake in wakeDataSource'>
+
+                  </select>
+                </div>
+                <br/>
+                <br/>
+                <button
+                  id="bnt-add-wake"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addItemAddWake()">
+                  add
+                </button>
+                <br/>
+
+                <div class="mdl-tooltip" for="txt-perfum-add-wake">
+                  the wake experience
+                </div>
+                <br/>
+
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <ul class="nav">
+                    <input class="mdl-textfield__input" type="text" id="txt-auragram-add-wake" ng-model="wake"/>
+                    <label class="mdl-textfield__label" for="txt-auragram-add-wake">wake ...</label>
+                    <li ng-repeat="itemAddWake in itemsAddWake.data" id="itemAddWake{{itemAddWake.id}}">
+                      <div>
+                        <h5>
+                          {{itemAddWake.title}}
+                          <a ng-click="deleteItemAddWake($index)" class="delete-item">x</a>
+                        </h5>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <br/>
+                <!-- Wake Experience -->
+                <br/>
+
+                <div class="mdl-tooltip" for="bnt-auragram-add">
+                  add the new auragram
+                </div>
+                <button id="bnt-auragram-add"
+                        style="background: #7F8FA6"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                        ng-click="addAuragram(auragramAddForm)"
+                  >
+                  add
+                </button>
+                <div class="mdl-tooltip" for="bnt-auragram-cancel">
+                  cancel the auragram
+                </div>
+                <button id="bnt-auragram-cancel"
+                        style="background: #7F8FA6"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                        ng-click="clearAuragram()">
+                  cancel
+                </button>
+              </div>
+              <!--Add-->
+            </span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">edit auragram</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div ng-repeat="auragram in mySelections">
+                <div ng-form="auragramEditForm">
+                  <div class="mdl-tooltip" for="txt-auragram-edit-name">
+                    the name perfume
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                    <input class="mdl-textfield__input" type="text" id="txt-auragram-edit-name"
+                           ng-model="auragram.name"/>
+                    <label class="mdl-textfield__label" for="txt-auragram-edit-name">name ...</label>
+                  </div>
+                  <div class="mdl-tooltip" for="txt-perfum-add-brand">
+                    the brand name perfume
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                    <input class="mdl-textfield__input" type="text" id="txt-auragram-edit-brand"
+                           ng-model="auragram.brand"/>
+                    <label class="mdl-textfield__label" for="txt-auragram-edit-brand">brand ...</label>
+                  </div>
+                  <br/>
+
+                  <div class="mdl-tooltip" for="bnt-auragram-add">
+                    add the new auragram
+                  </div>
+                  <button id="bnt-auragram-add-edit"
+                          style="background: #7F8FA6"
+                          class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                          ng-click="updateAuragram(auragram)">
+                    update
+                  </button>
+                </div>
+              </div>
+            </span>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="/logout" target="_self" id="view-source"
+     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Logout</a>
+</div>

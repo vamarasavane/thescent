@@ -1,0 +1,328 @@
+<style>
+  .grid {
+    width: 300px;
+    height: 500px;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+
+  .delete-item {
+    float: right;
+    margin-right: 2px;
+    color: #fff;
+    padding: 2px 6px;
+    background-color: #FC6A6A;
+    border-radius: 100%;
+  }
+
+</style>
+
+<div ng-controller="TextureCtrl">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class="thescent-header mdl-layout__header mdl-layout__header--waterfall">
+      <div class="mdl-layout__header-row">
+          <span class="thescent-title mdl-layout-title">
+           <a href="/admin"><img class="thescent-logo-image" src="assets/images/logo_2015_black.png"></a>>
+          </span>
+
+        <div class="thescent-header-spacer mdl-layout-spacer"></div>
+        <div class="thescent-navigation-container">
+          <nav class="thescent-navigation mdl-navigation">
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/perfume">perfume</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/texture">texture</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/place">place</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/color">color</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/taste">taste</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/sound">sound</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/olfactory">olfactory</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/wake">wake</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/gender">gender</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="thescent-content mdl-layout__content">
+      <a name="top"></a>
+
+      <div class="thescent-be-together-section mdl-typography--text-center">
+        <div class="thescent-font thescent-slogan">manage texture</div>
+        <br/>
+        <button style="background: #7F8FA6"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" ng-click="gotodensitivity()">
+          densitivity
+        </button>
+        <button style="background: #7F8FA6"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" ng-click="gotosensitivity()">
+          sensitivity
+        </button>
+        <div class="thescent-font thescent-sub-slogan">
+          <div class="thescent-card-container mdl-grid">
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">list texture</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+<div id="textureGrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection class="grid"></div>
+              <div ng-if='columnChanged'>
+                Column Visibility Changed - name: {{ columnChanged.name }} visible: {{ columnChanged.visible }}
+              </div>
+            </span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">detail texture</h4>
+              </div>
+              <div ng-repeat="texture in mySelections">
+	                <span class="mdl-typography--font-light mdl-typography--subhead">
+                    <br/>
+	                  <b>name :</b>{{texture.name}}
+	                  <br/>
+	                  <br/>
+	                  <b>value :</b>{{texture.value}}
+                    <br/>
+                    <br/>
+                    <div ng-repeat="sensitivity in texture.sensitivitys">
+                      <b>sensitivity :</b> {{sensitivity.title}}
+                    </div>
+                    <br/>
+                    <br/>
+                    <div ng-repeat="densitivity in texture.densitivitys">
+                      <b>densitivity :</b> {{densitivity.title}}
+                    </div>
+                    <b>period created :</b>{{texture.period_created | date:'shortDate'}}
+                  </span>
+
+                <div class="mdl-card__menu">
+                  <button
+                    class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                    ng-click="removeTexture(texture._id)">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">adding texture</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div ng-form="textureAddForm">
+                <div class="mdl-tooltip" for="txt-add-texture-name">
+                  the texture name
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input class="mdl-textfield__input"
+                         type="text" id="txt-add-texture-name"
+                         ng-model="texture.name"
+                         ng-model="color.name"
+                         ng-minlength="3"
+                         ng-maxlength="30"
+                         required/>
+                  <label class="mdl-textfield__label" for="txt-add-texture-name">name ...</label>
+                </div>
+                <div class="mdl-tooltip" for="txt-add-texture-value">
+                  the texture value
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input class="mdl-textfield__input"
+                         type="text"
+                         id="txt-add-texture-value"
+                         ng-model="texture.value"
+                         ng-model="color.name"
+                         ng-minlength="3"
+                         ng-maxlength="30"
+                         required/>
+                  <label class="mdl-textfield__label" for="txt-add-texture-value">value ...</label>
+                </div>
+                <br/>
+
+                <div class="mdl-tooltip" for="cmb-add-textute-densitivity">
+                  select densitivity
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <select id="cmb-add-textute-densitivity"
+                          ng-model='densitivity'
+                          ng-options='densitivity.value as densitivity.name for densitivity in densitivityDataSource'>
+
+                  </select>
+                  <label class="mdl-textfield__label" for="cmb-add-textute-densitivity">densitivity</label>
+                </div>
+                <br/>
+
+                <div class="mdl-tooltip" for="txt-add-textute-densitivity">
+                  the densitivity value
+                </div>
+                <br/>
+                <button
+                  id="bnt-add-Densitivity"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addItemAddDensitivity()">
+                  add
+                </button>
+                <br/>
+
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <ul class="nav">
+                    <input class="mdl-textfield__input" type="text" id="txt-add-textute-densitivity"
+                           ng-model="densitivity"/>
+                    <label class="mdl-textfield__label" for="txt-add-textute-densitivity">densitivity ...</label>
+
+                    <li ng-repeat="itemAddDensitivity in itemsAddDensitivity.data"
+                        id="itemAddDensitivity{{itemAddDensitivity.id}}">
+                      <div>
+                        <h5>
+                          {{itemAddDensitivity.title}}
+                          <a ng-click="deleteItemAddDensitivity($index)" class="delete-item">x</a>
+                        </h5>
+
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mdl-tooltip" for="cmb-add-textute-sensitivity">
+                  select sensitivity
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <select id="cmb-add-textute-sensitivity"
+                          ng-model='sensitivity'
+                          required
+                          ng-options='sensitivity.value as sensitivity.name for sensitivity in sensitivityDataSource'>
+
+                  </select>
+                  <label class="mdl-textfield__label" for="cmb-add-textute-sensitivity">sensitivity</label>
+                </div>
+                <br/>
+
+                <div class="mdl-tooltip" for="txt-add-textute-sensitivity">
+                  the sensitivity value
+                </div>
+                <br/>
+                <button
+                  id="bnt-add-Sensitivity"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addItemAddSensitivity()">
+                  add
+                </button>
+                <br/>
+
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <ul class="nav">
+                    <input class="mdl-textfield__input" type="text" id="txt-add-textute-sensitivity"
+                           ng-model="sensitivity"/>
+                    <label class="mdl-textfield__label" for="txt-add-textute-sensitivity">sensitivity ...</label>
+                    <li ng-repeat="itemAddSensitivity in itemsAddSensitivity.data"
+                        id="itemAddSensitivity{{itemAddSensitivity.id}}">
+                      <div>
+                        <h5>
+                          {{itemAddSensitivity.title}}
+                          <a ng-click="deleteItemAddSensitivity($index)" class="delete-item">x</a>
+                        </h5>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <br/>
+
+                <div class="mdl-tooltip" for="bnt-add-textute">
+                  add data
+                </div>
+                <button
+                  id="bnt-add-textute"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="addTexture(textureAddForm)">
+                  add
+                </button>
+                <div class="mdl-tooltip" for="bnt-cancel-textute">
+                  cancel the form
+                </div>
+                <button
+                  id="bnt-cancel-textute"
+                  style="background: #7F8FA6"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                  ng-click="clearTexture()">
+                  cancel
+                </button>
+              </div>
+            </span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">edit texture</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div ng-repeat="texture in mySelections">
+                <div ng-form="textureEditForm">
+                  <div class="mdl-tooltip" for="txt-add-texture-name">
+                    the texture name
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                    <input class="mdl-textfield__input"
+                           type="text" id="txt-edit-texture-name"
+                           ng-model="texture.name"
+                           ng-minlength="3"
+                           ng-maxlength="30"
+                           required/>
+                    <label class="mdl-textfield__label" for="txt-edit-texture-name">name ...</label>
+                  </div>
+                  <div class="mdl-tooltip" for="txt-add-texture-value">
+                    the texture value
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                    <input class="mdl-textfield__input"
+                           type="text"
+                           id="txt-edit-texture-value"
+                           ng-model="texture.value"
+                           ng-minlength="3"
+                           ng-maxlength="30"
+                           required/>
+                    <label class="mdl-textfield__label" for="txt-edit-texture-value">value ...</label>
+                  </div>
+                  <br/>
+
+                  <div class="mdl-tooltip" for="bnt-add-textute">
+                    add data
+                  </div>
+                  <button
+                    id="bnt-add-edit-textute"
+                    style="background: #7F8FA6"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                    ng-click="updateTexture(texture)">
+                    update
+                  </button>
+                </div>
+              </div>
+            </span>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="/logout" target="_self" id="view-source"
+     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Logout</a>
+</div>

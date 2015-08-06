@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	
+	<!-- Startup configuration -->
+	<link rel="manifest" href="manifest.json">
+
+	<!-- Fallback application metadata for legacy browsers -->
+	<meta name="application-name" content="Store Finder">
+	<link rel="icon" sizes="16x16 32x32 48x48" href="lo_def.ico">
+	<link rel="icon" sizes="512x512" href="hi_def.png">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="initial-scale=1, width=device-width, user-scalable=no">
+
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,100,300,200' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/style_before.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/intro.css">
+	<link rel="stylesheet" href="css/validate_stylenew.css">
+
+	<title>The Scent</title>
+
+
+	<script>
+		var reco = function(choix){
+			//choix: objet JSON =>
+			//{
+			// texture : index de la texture choisie de 0 à 8,
+			// couleur : code rgb de la couleur,
+			// lieu    : index du lieu choisi,
+			// son     : index du son choisi,
+			// gout    : index du gout choisi,
+			// genre   : text du sexe
+			// }
+			console.log(choix);
+		}
+	</script>
+
+	
+
+
+</head>
+<body>
+
+	<div id="intro"></div>
+	<div id="xp_lieux_lumiere">
+		<div id="xp_lieux_assombri"></div>
+		<div id="jnQuit"></div>
+		<div id="jour_nuit">
+			<div id="jnSlider"></div>
+			<div id="jour"></div>
+			<div id="nuit"></div>
+		</div>
+	</div>
+	<div id="validate"></div>
+	<div id="transition"></div>
+
+
+	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+	<script src="js/three.min.js"></script>
+	<script src="js/dat.gui.min.js"></script>
+	<script src="js/JSONLoader.js"></script>	
+	<script src="js/jqueryMobile.js"></script>
+	<script src="js/tween_min.js"></script>
+	<script src="js/init_XPs.js"></script>
+	
+
+
+	<!-- HTML caché, servant de ressource pour JS -->
+	<div id="ressources">
+
+		<div id="clickbut">
+			<p class="clic" onclick="start();">
+				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 127 127" enable-background="new 0 0 127 127" xml:space="preserve">
+					<rect width="127" height="127"/>
+					<rect x="64" y="60" fill="#FFFFFF" width="7" height="7"/>
+					<rect x="57" y="67" fill="#FFFFFF" width="7" height="7"/>
+					<rect x="57" y="53" fill="#FFFFFF" width="7" height="7"/>
+				</svg>   
+			</p>
+		</div>
+
+		<div id="resCol"><div class="transition_box">
+			<div class="align_grid_transition">    
+				<div class="grid_transition">
+					<div class="grid_txt">
+						<h2 class="scent_transition_title">
+							<p><span>- 2 / 5 -</span></p>
+							<p><span>which color</span></p>
+							<p><span>charts speaks</span></p>
+							<p><span>to you?</span></p>
+						</h2>
+					</div>  
+				</div>  
+			</div>
+
+		</div></div>
+
+		<!-- TEXT TRANSITION XP LIEU 2/6 -->  
+
+		<div id="reslieu"><div class="transition_box">
+			<div class="align_grid_transition">    
+				<div class="grid_transition">
+					<div class="grid_txt">
+						<h2 class="scent_transition_title">
+							<p><span>- 5 / 5 -</span></p>
+							<p><span>where would you</span></p>
+							<p><span>rather be</span></p>
+							<p><span>right now?</span></p>
+						</h2>
+					</div>  
+				</div>  
+			</div>
+
+		</div>     </div>
+
+		<!-- TEXT TRANSITION XP SOUND 3/6 -->  
+
+		<div id="resSon"><div class="transition_box">
+			<div class="align_grid_transition">    
+				<div class="grid_transition">
+					<div class="grid_txt">
+						<h2 class="scent_transition_title">
+							<p><span>- 4 / 5 -</span></p>
+							<p><span>where will</span></p>
+							<p><span>sound take</span></p>
+							<p><span>you?</span></p>
+						</h2>
+					</div>  
+				</div>  
+			</div>
+
+		</div>     </div>
+
+		<!-- TEXT TRANSITION XP TEXTURE 4/6 -->    
+
+		<div id="resText"><div class="transition_box">
+			<div class="align_grid_transition">    
+				<div class="grid_transition">
+					<div class="grid_txt">
+						<h2 class="scent_transition_title">
+							<p><span>- 1 / 5 -</span></p>
+							<p><span>what do you</span></p>
+							<p><span>wanna feel at</span></p>
+							<p><span>your fingertips?</span></p>
+						</h2>
+					</div>  
+				</div>  
+			</div>
+
+		</div>
+	</div>
+	<!-- TEXT TRANSITION XP GOUT 5/6 -->    
+
+	<div id="resGout"><div class="transition_box">
+		<div class="align_grid_transition">    
+			<div class="grid_transition">
+				<div class="grid_txt">
+					<h2 class="scent_transition_title">
+						<p><span>- 3 / 5 -</span></p>
+						<p><span>what makes</span></p>
+						<p><span>you droll</span></p>
+						<p><span>over?</span></p>
+					</h2>
+				</div>  
+			</div>  
+		</div>
+		<p class="clic">
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 127 127" enable-background="new 0 0 127 127" xml:space="preserve">
+				<rect width="127" height="127"/>
+				<rect x="64" y="60" fill="#FFFFFF" width="7" height="7"/>
+				<rect x="57" y="67" fill="#FFFFFF" width="7" height="7"/>
+				<rect x="57" y="53" fill="#FFFFFF" width="7" height="7"/>
+			</svg>   
+		</p>
+	</div>    </div>
+
+	<div id="resSexe"><div class="transition_box">
+		<div class="align_grid_transition">    
+			<div class="grid_transition">
+				<div class="grid_txt">
+					<h2 class="scent_transition_title">
+						<p><span> </span></p>
+						<p><span>Draw</span></p>
+						<p><span>your</span></p>
+						<p><span>gender</span></p>
+					</h2>
+				</div>  
+			</div>  
+		</div>
+		<p class="clic">
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 127 127" enable-background="new 0 0 127 127" xml:space="preserve">
+				<rect width="127" height="127"/>
+				<rect x="64" y="60" fill="#FFFFFF" width="7" height="7"/>
+				<rect x="57" y="67" fill="#FFFFFF" width="7" height="7"/>
+				<rect x="57" y="53" fill="#FFFFFF" width="7" height="7"/>
+			</svg>   
+		</p>
+	</div>    </div>
+
+	<!-- TEXT VALIDATE YOUR ... ( YES / NO ) -->    
+
+	<div id="valYN"><div class="transition_box">
+		<div class="align_grid_transition">    
+			<div class="grid_transition">
+				<div class="grid_txt">
+					<h2 class="scent_transition_title">
+						<p><span id="nb">-x-</span></p>
+						<p><span>validate</span></p>
+						<p><span>your</span></p>
+						<p><span id="xp_txt"><!-- color/loc/sound/ --></span></p>
+					</h2>
+				</div>  
+			</div>  
+		</div>
+		<p class="validate_yes" >
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 127 127" enable-background="new 0 0 127 127" xml:space="preserve" onclick="validate_yes()">
+				<rect width="127" height="127"/>
+				<rect x="53" y="70" fill="#FFFFFF" width="7" height="7"/>
+				<rect x="60" y="63" fill="#FFFFFF" width="7" height="7"/>
+				<rect x="46" y="63" fill="#FFFFFF" width="7" height="7"/>
+				<rect x="67" y="56" fill="#FFFFFF" width="7" height="7"/>
+				<rect x="74" y="49" fill="#FFFFFF" width="7" height="7"/>
+			</svg> 
+		</p>
+		<p class="validate_no" >
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 127 127" enable-background="new 0 0 127 127" xml:space="preserve" onclick="validate_no()">
+				<rect x="4" y="4" fill="none" stroke="#000000" stroke-width="8" stroke-miterlimit="10" width="119" height="119"/>
+				<rect x="60" y="61" width="7" height="7"/>
+				<rect x="67" y="54" width="7" height="7"/>
+				<rect x="53" y="68" width="7" height="7"/>
+				<rect x="46" y="75" width="7" height="7"/>
+				<rect x="67" y="68" width="7" height="7"/>
+				<rect x="74" y="75" width="7" height="7"/>
+				<rect x="53" y="54" width="7" height="7"/>
+				<rect x="46" y="47" width="7" height="7"/>
+				<rect x="74" y="47" width="7" height="7"/>
+			</svg>
+		</p>
+	</div> 
+</div>
+
+<div id="XP_gout">
+	<div id="home"></div>
+	<div id="Sweety">
+		<div class="diapo d1"></div>
+		<div class="diapo d2"></div>
+		<div class="diapo d3"></div>
+		<div class="diapo d4"></div>
+		<div class="diapo d5"></div>
+		<div class="diapo d6"></div><div class="diapo d1"></div>
+	</div>
+	<div id="Sour">
+		<div class="diapo d1"></div>
+		<div class="diapo d2"></div>
+		<div class="diapo d3"></div>
+		<div class="diapo d4"></div>
+		<div class="diapo d5"></div>
+		<div class="diapo d1"></div>
+	</div>
+	<div id="Salty">
+		<div class="diapo d1"></div>
+		<div class="diapo d2"></div>
+		<div class="diapo d3"></div>
+		<div class="diapo d4"></div>
+		<div class="diapo d5"></div>
+		<div class="diapo d1"></div>
+	</div>
+	<div id="Bitter">
+		<div class="diapo d1"></div>
+		<div class="diapo d2"></div>
+		<div class="diapo d3"></div>
+		<div class="diapo d4"></div>
+		<div class="diapo d5"></div>
+		<div class="diapo d6"></div><div class="diapo d1"></div>
+	</div>
+	<ul class="taste_menu" id="tast_menu">
+
+		<li data-menuanchor="secondPage" id="link_sweety"></li>
+		<li data-menuanchor="3rdPage" id="link_sours"></li>
+		<li data-menuanchor="4thpage" id="link_salty"></li>
+		<li data-menuanchor="lastPage" id="link_bitter"></li>
+	</ul>
+</div>
+
+
+<div id="Sexe">
+	<canvas id="drawing"></canvas>
+	<canvas id="buffer"></canvas>
+
+	<div id="gender"></div>
+</div>
+
+
+
+<div id="pageReco">
+	<div class="bkg-auragramme" id="auragramme">
+		<div class="moodbloc">
+			<div class="mood">
+				<div class="vertical-mood">
+					<h1>your olfactory mood</h1>
+					<p class="olfactory"><span id="first-family">adjectif</span> & <span id="second-family">adjectif</span></p>
+					<p id="personal-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sed malesuada lorem.</p>
+				</div>
+			</div>
+			<div class="discover">
+				<a class="active-aura">
+					<div class="link-aura"><p>discover your olfactory auragram</p></div> 
+					<div class="icon-next"></div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper-reco">
+		<div class="podium">
+			<div class="first-scent">
+				<ul>
+					<li id="first-scent-name">amor amor</li>
+					<li id="first-scent-house">Cacharel</li>
+				</ul>
+				<p>&hearts; | <b id="first-scent-prize">43</b>€ <i>free returns</i></p>
+				<div id="first-scent-img">
+					<p><img src="images/reco/amor.jpeg" width="900px" height="900px;" /></p>
+				</div>
+				<div class="link-shop">
+					<a href="#" class="shopnow" style="width:100%;left:0;">
+						<div class="shop-box">
+							<div class="shopnow-txt"><p>shop now</p></div>
+							<div class="icon-next"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="second-scent">
+				<ul>
+					<li id="second-scent-name">untilted</li>
+					<li id="second-scent-house">Maison Martin Margiela</li>
+				</ul>
+				<p>&hearts; | <b id="second-scent-prize">43</b>€ <i>free returns</i></p>
+				<div id="second-scent-img">
+					<p><img src="images/reco/untilted.jpg" width="900px" height="900px;" /></p>
+				</div>
+				<div class="link-shop">
+					<a href="#" class="shopnow" style="width:100%;left:0;">
+						<div class="shop-box">
+							<div class="shopnow-txt"><p>shop now</p></div>
+							<div class="icon-next"></div>  
+						</div>
+					</a>
+				</div>
+			</div> 
+			<div class="third-scent">
+				<ul>
+					<li id="third-scent-name">flowerbomb</li>
+					<li id="third-scent-house">Viktor & Rolf</li>
+				</ul>
+				<p>&hearts; | <b id="third-scent-prize">62</b>€ <i>free returns</i></p>
+				<div id="third-scent-img">
+					<p><img src="images/reco/flowerbomb.jpg" width="900px" height="900px;" />  </p>
+				</div>
+				<div class="link-shop">
+					<a href="#" class="shopnow" style="width:100%;left:0;">
+						<div class="shop-box">
+							<div class="shopnow-txt"><p>shop now</p></div>
+							<div class="icon-next"></div>
+						</div>
+					</a>
+				</div>
+			</div> 
+		</div><!-- end of podium --> 
+		<h1 class="test-choose"> test & choose</h1>
+		<p>Need time to evaluate our recommandations and find the one?</p>
+		<div class="others-box">
+			<div id="others-reco-one">
+				<p id="others-reco-txt-one">order now one or several frangrances, test it, love it or send back for free!</p>
+				<a href="#" class="shopnow">
+					<div class="shopnow-txt"><p>shop now</p></div>
+					<div class="icon-next"></div>  
+				</a>
+			</div>
+			<div id="others-reco-two">
+				<p id="others-reco-txt-two">order samples you love and get XX€ of your frangrance purchase*</p>
+				<a href="#" class="shopnow">
+					<div class="shopnow-txt"><p>order now</p></div>
+					<div class="icon-next"></div>  
+				</a>
+			</div>
+		</div>
+		<div class="border-bottom"></div>
+	</div> <!-- end of wrapper-reco -->  
+
+
+	<script>
+		$(".active-aura").on("click", function(){
+			$(".moodbloc").toggleClass("off");
+			$(".wrapper-reco").toggleClass("off2");
+			$(".bkg-auragramme").toggleClass("off3");
+		}); 
+	</script> 
+</div>
+
+
+
+</div>
+</body>
+</html>

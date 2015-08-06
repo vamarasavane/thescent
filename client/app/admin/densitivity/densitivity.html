@@ -1,0 +1,213 @@
+<style>
+  .grid {
+    width: 300px;
+    height: 500px;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+
+  .delete-item {
+    float: right;
+    margin-right: 2px;
+    color: #fff;
+    padding: 2px 6px;
+    background-color: #FC6A6A;
+    border-radius: 100%;
+  }
+
+</style>
+<div ng-controller="DensitivityCtrl">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class="thescent-header mdl-layout__header mdl-layout__header--waterfall">
+      <div class="mdl-layout__header-row">
+          <span class="thescent-title mdl-layout-title">
+           <a href="/admin"><img class="thescent-logo-image" src="assets/images/logo_2015_black.png"></a>
+          </span>
+
+        <div class="thescent-header-spacer mdl-layout-spacer"></div>
+        <div class="thescent-navigation-container">
+          <nav class="thescent-navigation mdl-navigation">
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/perfume">perfume</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/texture">texture</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/place">place</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/color">color</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/taste">taste</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/sound">sound</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/olfactory">olfactory</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/wake">wake</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/gender">gender</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="thescent-content mdl-layout__content">
+      <a name="top"></a>
+
+      <div class="thescent-be-together-section mdl-typography--text-center">
+        <div class="thescent-font thescent-slogan">manage densitivity</div>
+        <br/>
+
+        <div class="thescent-font thescent-sub-slogan">
+          <div class="thescent-card-container mdl-grid">
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">list densitivity</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div id="densitivityGrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection class="grid"></div>
+              <div ng-if='columnChanged'>
+                Column Visibility Changed - name: {{ columnChanged.name }} visible: {{ columnChanged.visible }}
+              </div>
+            </span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">detail densitivity</h4>
+              </div>
+              <div ng-repeat="densitivity in mySelections">
+	                <span class="mdl-typography--font-light mdl-typography--subhead">
+                     <br/>
+	                  <b>name :</b>{{densitivity.name}}
+	                  <br/>
+	                  <br/>
+	                  <b>value :</b>{{densitivity.value}}
+					           <br/>
+	                  <br/>
+                    <b>period created :</b>{{densitivity.period_created | date:'shortDate'}}
+                  </span>
+
+                <div class="mdl-card__menu">
+                  <button
+                    class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                    ng-click="removeDensitivity(densitivity._id)">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">adding densitivity</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div ng-form="densitivityEditForm">
+                <div class="mdl-tooltip" for="txt-add-densitivity-name">
+                  the texture name densitivity
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input
+                    class="mdl-textfield__input"
+                    type="text"
+                    id="txt-add-densitivity-name"
+                    ng-model="densitivity.name"
+                    required/>
+                  <label class="mdl-textfield__label" for="txt-add-densitivity-name">name ...</label>
+                </div>
+                <div class="mdl-tooltip" for="txt-add-densitivity-value">
+                  the texture value densitivity
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input
+                    class="mdl-textfield__input"
+                    type="text" id="txt-add-densitivity-value"
+                    ng-model="densitivity.value"
+                    required/>
+                  <label class="mdl-textfield__label" for="txt-add-densitivity-value">value ...</label>
+                </div>
+                <br/>
+
+                <div class="mdl-tooltip" for="bnt-add-densitivity">
+                  the add texture densitivity data
+                </div>
+                <button id="bnt-add-add-densitivity"
+                        style="background: #7F8FA6"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                        ng-click="addDensitivity()">
+                  add
+                </button>
+                <div class="mdl-tooltip" for="bnt-add-densitivity">
+                  the cancel texture densitivity data
+                </div>
+                <button id="bnt-add-cancel-densitivity"
+                        style="background: #7F8FA6"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                        ng-click="clearDensitivity()">
+                  cancel
+                </button>
+              </div>
+            </span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">edit densitivity</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div ng-repeat="densitivity in mySelections">
+                <div ng-form="densitivityEditForm">
+                  <div class="mdl-tooltip" for="txt-edit-densitivity-name">
+                    the texture name densitivity
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                    <input
+                      class="mdl-textfield__input"
+                      type="text"
+                      id="txt-edit-densitivity-name"
+                      ng-model="densitivity.name"/>
+                    <label class="mdl-textfield__label" for="txt-edit-densitivity-name">name ...</label>
+                  </div>
+                  <div class="mdl-tooltip" for="txt-edit-densitivity-value">
+                    the texture value densitivity
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                    <input
+                      class="mdl-textfield__input"
+                      type="text"
+                      id="txt-edit-densitivity-value"
+                      ng-model="densitivity.value"/>
+                    <label class="mdl-textfield__label" for="txt-edit-densitivity-value">value ...</label>
+                  </div>
+                  <br/>
+
+                  <div class="mdl-tooltip" for="bnt-edit-add-densitivity">
+                    the add texture densitivity data
+                  </div>
+                  <button id="bnt-edit-densitivity"
+                          style="background: #7F8FA6"
+                          class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                          ng-click="updateDensitivity(densitivity)">
+                    update
+                  </button>
+                </div>
+              </div>
+            </span>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="/logout" target="_self" id="view-source"
+     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Logout</a>
+</div>

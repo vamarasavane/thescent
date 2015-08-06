@@ -1,0 +1,94 @@
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <div class="thescent-header mdl-layout__header mdl-layout__header--waterfall">
+    <div class="mdl-layout__header-row">
+          <span class="thescent-title mdl-layout-title">
+           <a href="/admin"><img class="thescent-logo-image" src="assets/images/logo_2015_black.png"></a>
+          </span>
+      <!-- Add spacer, to align navigation to the right in desktop -->
+      <div class="thescent-header-spacer mdl-layout-spacer"></div>
+
+      <div class="thescent-navigation-container">
+
+        <nav class="thescent-navigation mdl-navigation">
+          <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/search">search</a>
+          <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/experiment">experience</a>
+          <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/about">about</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="thescent-content mdl-layout__content">
+    <a name="top"></a>
+    <div class="thescent-be-together-section mdl-typography--text-center">
+      <div class="thescent-font thescent-slogan">the scent</div>
+      <div class="thescent-font thescent-sub-slogan">
+        backoffice
+      </div>
+      <form class="form" name="form" ng-submit="login(form)" novalidate>
+        <div class="mdl-textfield mdl-js-textfield textfield-demo">
+          <input class="mdl-textfield__input" id="txtEmail" type="email" name="email" ng-model="user.email" />
+          <label class="mdl-textfield__label" for="txtEmail" >Email</label>
+        </div>
+
+
+        <div class="mdl-textfield mdl-js-textfield textfield-demo">
+          <input class="mdl-textfield__input" type="password" name="password" ng-model="user.password" required id="txtPassword" />
+          <label class="mdl-textfield__label" for="txtPassword">Password</label>
+        </div>
+
+
+
+        <!-- Flat button with ripple -->
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">
+          Login
+        </button>
+
+
+      </form>
+
+
+      <a href="#screens">
+        <button class="thescent-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+          <i class="material-icons">
+
+
+          </i>
+        </button>
+      </a>
+    </div>
+    <div class="thescent-more-section">
+
+
+
+
+    </div>
+
+    <footer class="mdl-mega-footer">
+      <div class="mdl-mega-footer--middle-section">
+
+        <div class="mdl-mega-footer--drop-down-section">
+          <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+          <h1 class="mdl-mega-footer--heading">COMPANY</h1>
+          <ul class="mdl-mega-footer--link-list">
+            <li><a href="/about">About</a></li>
+            <li><a href="/terms">Terms</a></li>
+            <li><a href="/partners">Partners</a></li>
+          </ul>
+        </div>
+
+
+      </div>
+
+      <div class="mdl-mega-footer--bottom-section">
+        <div class="mdl-logo">© 2015 sismodesign</div>
+
+      </div>
+
+    </footer>
+  </div>
+</div>
+<a href="/" target="_self" id="view-source"
+   class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">home</a>

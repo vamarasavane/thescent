@@ -1,0 +1,208 @@
+<style>
+  .grid {
+    width: 300px;
+    height: 500px;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  .delete-item {
+    float: right;
+    margin-right: 2px;
+    color: #fff;
+    padding: 2px 6px;
+    background-color: #FC6A6A;
+    border-radius: 100%;
+  }
+
+</style>
+<div ng-controller="LightCtrl">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class="thescent-header mdl-layout__header mdl-layout__header--waterfall">
+      <div class="mdl-layout__header-row">
+          <span class="thescent-title mdl-layout-title">
+           <a href="/admin"><img class="thescent-logo-image" src="assets/images/logo_2015_black.png"></a>
+          </span>
+
+        <div class="thescent-header-spacer mdl-layout-spacer"></div>
+        <div class="thescent-navigation-container">
+          <nav class="thescent-navigation mdl-navigation">
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/perfume">perfume</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/texture">texture</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/place">place</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/color">color</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/taste">taste</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/sound">sound</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/olfactory">olfactory</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/wake">wake</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/gender">gender</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="thescent-content mdl-layout__content">
+      <a name="top"></a>
+
+      <div class="thescent-be-together-section mdl-typography--text-center">
+        <div class="thescent-font thescent-slogan">manage light</div>
+        <div class="thescent-font thescent-sub-slogan">
+          <div class="thescent-card-container mdl-grid">
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">list light</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div id="lightGrid" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection class="grid"></div>
+              <div ng-if='columnChanged'>
+                Column Visibility Changed - name: {{ columnChanged.name }} visible: {{ columnChanged.visible }}
+              </div>
+            </span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">detail light</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <div ng-repeat="light in mySelections">
+	                <span class="mdl-typography--font-light mdl-typography--subhead">
+                    <br/>
+	                  <b>name :</b>{{light.name}}
+	                  <br/>
+	                  <br/>
+	                  <b>value :</b>{{light.value}}
+	                  <br/>
+                    <br/>
+                    <b>period created :</b>{{light.period_created | date:'shortDate'}}
+                  </span>
+
+                  <div class="mdl-card__menu">
+                    <button
+                      class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                      ng-click="removeLight(light._id)">
+                      <i class="material-icons">delete</i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">adding light</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div ng-form="lightAddForm">
+                <div class="mdl-tooltip" for="txt-add-name">
+                  the light name
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input class="mdl-textfield__input"
+                         type="text" id="txt-add-name"
+                         ng-model="light.name"
+                         ng-minlength="3"
+                         ng-maxlength="30"
+                         required/>
+                  <label class="mdl-textfield__label" for="txt-add-name">name ...</label>
+                </div>
+                <div class="mdl-tooltip" for="txt-add-value">
+                  the light value
+                </div>
+                <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                  <input class="mdl-textfield__input"
+                         type="text" id="txt-add-value"
+                         ng-model="light.value"
+                         ng-minlength="3"
+                         ng-maxlength="30"
+                         required/>
+                  <label class="mdl-textfield__label" for="txt-add-value">value ...</label>
+                </div>
+                <br/>
+
+                <div class="mdl-tooltip" for="bnt-add-add">
+                  the add light data
+                </div>
+                <button id="bnt-add-add"
+                        style="background: #7F8FA6"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                        ng-click="addLight(lightAddForm)">
+                  add
+                </button>
+                <div class="mdl-tooltip" for="txt-add-value">
+                  the cancel light form
+                </div>
+                <button id="bnt-add-cancel"
+                        style="background: #7F8FA6"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                        ng-click="clearLight()">
+                  cancel
+                </button>
+              </div>
+            </span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media">
+              </div>
+              <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">edit light</h4>
+              </div>
+              <div class="mdl-card__supporting-text">
+            <span class="mdl-typography--font-light mdl-typography--subhead">
+              <div ng-repeat="light in mySelections">
+                <div ng-form="lightEditForm">
+                  <div class="mdl-tooltip" for="txt-edit-name">
+                    the name light
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                    <input class="mdl-textfield__input" type="text" id="txt-edit-name"
+                           ng-model="light.name"/>
+                    <label class="mdl-textfield__label" for="txt-edit-name">name ...</label>
+                  </div>
+                  <div class="mdl-tooltip" for="txt-edit-value">
+                    the value light
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                    <input class="mdl-textfield__input" type="text" id="txt-edit-value"
+                           ng-model="light.value"/>
+                    <label class="mdl-textfield__label" for="txt-edit-value">value ...</label>
+                  </div>
+                  <br/>
+
+                  <div class="mdl-tooltip" for="bnt-edit-add">
+                    the add light data
+                  </div>
+                  <button id="bnt-edit-add"
+                          style="background: #7F8FA6"
+                          class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                          ng-click="updateLight(light)">
+                    update
+                  </button>
+
+                </div>
+              </div>
+            </span>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="/logout" target="_self" id="view-source"
+     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Logout</a>
+</div>

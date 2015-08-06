@@ -1,0 +1,95 @@
+<div ng-controller="MainCtrl">
+
+
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+    <div class="thescent-header mdl-layout__header mdl-layout__header--waterfall">
+      <div class="mdl-layout__header-row">
+          <span class="thescent-title mdl-layout-title">
+           <a href="/"><img class="thescent-logo-image" src="assets/images/logo_2015_black.png"></a>
+          </span>
+        <!-- Add spacer, to align navigation to the right in desktop -->
+        <div class="thescent-header-spacer mdl-layout-spacer"></div>
+
+        <div class="thescent-navigation-container">
+
+          <nav class="thescent-navigation mdl-navigation">
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/search">search</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/help">help</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <div class="thescent-content mdl-layout__content">
+      <a name="top"></a>
+      <div class="thescent-be-together-section mdl-typography--text-center">
+        <div class="thescent-font thescent-slogan">the scent</div>
+        <br/>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+               style="background: #7F8FA6" ng-click="experimenttexture()">
+          texture
+        </button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                style="background: #7F8FA6" ng-click="experimentcolor()">
+          color
+        </button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                style="background: #7F8FA6" ng-click="experimenttaste()">
+          taste
+        </button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                style="background: #7F8FA6" ng-click="experimentsound()">
+          sound
+        </button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                style="background: #7F8FA6" ng-click="experimentplace()">
+          place
+        </button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                style="background: #7F8FA6" ng-click="experimentgender()">
+          gender
+        </button>
+        <div class="thescent-font thescent-sub-slogan">
+          <iframe src="front-thescent/index.html"
+                  width="600px" height="512px" >
+          </iframe>
+
+          <br/>
+          <br/>
+        </div>
+
+
+      </div>
+
+      <footer class="mdl-mega-footer">
+        <div class="mdl-mega-footer--middle-section">
+
+          <div class="mdl-mega-footer--drop-down-section">
+            <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+            <h1 class="mdl-mega-footer--heading">COMPANY</h1>
+            <ul class="mdl-mega-footer--link-list">
+              <li><a href="/about">About</a></li>
+              <li><a href="/terms">Terms</a></li>
+              <li><a href="/partners">Partners</a></li>
+            </ul>
+          </div>
+
+
+        </div>
+
+        <div class="mdl-mega-footer--bottom-section">
+          <div class="mdl-logo">© 2015 sismodesign</div>
+
+        </div>
+
+      </footer>
+    </div>
+  </div>
+  <a href="/login" target="_self" id="view-source"
+     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">backoffice</a>
+
+
+
+
+</div>

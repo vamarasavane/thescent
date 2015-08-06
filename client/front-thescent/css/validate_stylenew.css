@@ -1,0 +1,279 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+margin: 0;
+padding: 0;
+border: 0;
+font-size: 100%;
+font: inherit;
+vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+display: block;
+}
+body {
+line-height: 1;
+
+}
+ol, ul {
+list-style: none;
+}
+blockquote, q {
+quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+content: '';
+content: none;
+}
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+
+@font-face {
+font-family: "AVM";
+src:url(typo/ITCAvantGardeStd-Md.otf);
+}
+
+@font-face {
+font-family: "AVK";
+src:url(typo/ITCAvantGardeStd-Bk.otf);
+}
+
+/* TRANSITION XP TEXT : animation du texte entre les experiences / Transitions */
+
+.transition_box {
+position: absolute;
+width: 80%;
+height: 300px;
+top: 50%;
+left: 50%;
+-webkit-transform: translate(-50%, -50%);
+-ms-transform: translate(-50%, -50%);
+-moz-transform: translate(-50%, -50%);
+-o-transform: translate(-50%, -50%);
+-webkit-transform: translate(-50%, -50%);
+overflow: hidden;
+}
+
+.align_grid_transition {
+position: absolute;
+width: 100%;
+height: 250px;
+top: 0%;
+left: 0%;
+overflow: hidden;
+}
+
+.grid_transition {
+position: absolute;
+width: 100%;
+height: 100%;
+}
+
+.grid_txt {
+width: 100%;
+height: 100%;
+display: inline-table;
+background: #fff;
+-webkit-animation:moveBoxTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-moz-animation:moveBoxTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-ms-animation:moveBoxTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-o-animation:moveBoxTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+animation:moveBoxTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+}
+
+.grid_txt h2 {
+-ms-transform: translate(0%, 0%);
+-moz-transform: translate(0%, 0%);
+-o-transform: translate(0%, 0%);
+-webkit-transform: translate(0%, 0%);
+    width: 100%;
+    height: 100%;
+}
+
+.scent_transition_title p, .validate_yes p, .validate_no p {
+font-family: "AVM";
+text-align: center;
+font-size: 1.2rem;
+color:/*#512460*/#000;
+letter-spacing: 2px;
+line-height: 1.8rem;
+}
+
+.scent_transition_title p {
+overflow: hidden;
+}
+
+.scent_transition_title p:nth-child(1) span {
+-webkit-animation:moveTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-moz-animation:moveTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-ms-animation:moveTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-o-animation:moveTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+animation:moveTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+font-size: 12px;
+font-family: "AVK";
+text-transform: uppercase;
+display: block;
+margin-bottom: 10px;
+    margin-top: 50px;
+}
+
+.scent_transition_title p:nth-child(2) span {
+-webkit-animation:moveTop .8s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-moz-animation:moveTop .8s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-ms-animation:moveTop .8s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-o-animation:moveTop .8s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+animation:moveTop .8s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+text-transform: uppercase;
+display: block;
+}
+
+.scent_transition_title p:nth-child(3) span {
+-webkit-animation:moveTop 1s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-moz-animation:moveTop 1s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-ms-animation:moveTop 1s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-o-animation:moveTop 1s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+animation:moveTop 1s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+text-transform: uppercase;
+display: block;
+}
+
+.scent_transition_title p:nth-child(4) span {
+-webkit-animation:moveTop 1.2s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-moz-animation:moveTop 1.2s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-ms-animation:moveTop 1.2s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-o-animation:moveTop 1.2s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+animation:moveTop 1.2s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+text-transform: uppercase;
+display: block;
+}
+
+.scent_transition_title p:nth-child(5) span {
+-webkit-animation:moveTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-moz-animation:moveTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-ms-animation:moveTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-o-animation:moveTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+animation:moveTop .6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+font-size: 30px;
+text-transform: uppercase;
+display: block;
+margin-top: 40px;
+}
+
+p.clic, p.validate_yes, p.validate_no {
+overflow: hidden;
+}
+
+p.clic svg {
+position: absolute;
+bottom: 10px;
+left: 50%;
+width: 20%;
+max-width: 80px;
+-ms-transform: translate(-50%, 0%);
+-moz-transform: translate(-50%, 0%);
+-o-transform: translate(-50%, 0%);
+-webkit-transform: translate(-50%, 0%);
+-webkit-animation:moveSvgTop 1.4s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-moz-animation:moveSvgTop 1.4s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-ms-animation:moveSvgTop 1.4s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-o-animation:moveSvgTop 1.4s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+animation:moveSvgTop 1.4s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+}
+
+p.validate_yes svg {
+position: absolute;
+bottom: 10px;
+left: 62%;
+width: 20%;
+max-width: 80px;
+-ms-transform: translate(-50%, 0%);
+-moz-transform: translate(-50%, 0%);
+-o-transform: translate(-50%, 0%);
+-webkit-transform: translate(-50%, 0%);
+-webkit-animation:moveSvgTop 1.4s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-moz-animation:moveSvgTop 1.4s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-ms-animation:moveSvgTop 1.4s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-o-animation:moveSvgTop 1.4s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+animation:moveSvgTop 1.4s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+}
+
+p.validate_no svg {
+position: absolute;
+bottom: 10px;
+left: 38%;
+width: 20%;
+max-width: 80px;
+-ms-transform: translate(-50%, 0%);
+-moz-transform: translate(-50%, 0%);
+-o-transform: translate(-50%, 0%);
+-webkit-transform: translate(-50%, 0%);
+-webkit-animation:moveSvgTop 1.6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-moz-animation:moveSvgTop 1.6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-ms-animation:moveSvgTop 1.6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+-o-animation:moveSvgTop 1.6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+animation:moveSvgTop 1.6s cubic-bezier(.785,.135,.15,.86) 0s 1 normal;
+background: #fff;
+}
+
+/* KEYFRAMES */
+
+@-webkit-keyframes moveBoxTop
+{
+0%{-webkit-transform:translate(0,100%);}
+100%{-webkit-transform:translate(0,0px);}
+}
+
+@-moz-keyframes moveBoxTop
+{
+0%{-moz-transform:translate(0,100%);}
+100%{-moz-transform:translate(0,0px);}
+}
+
+
+@-webkit-keyframes moveTop
+{
+0%{-webkit-transform:translate(0,100px);}
+100%{-webkit-transform:translate(0,0px);}
+}
+
+@-moz-keyframes moveTop
+{
+0%{-moz-transform:translate(0,100px);}
+100%{-moz-transform:translate(0,0px);}
+}
+
+@-webkit-keyframes moveSvgTop
+{
+0%{-webkit-transform:translate(-50%,110%);}
+100%{-webkit-transform:translate(-50%,0);}
+}
+
+@-moz-keyframes moveSvgTop
+{
+0%{-moz-transform:translate(-50%,110%);}
+100%{-moz-transform:translate(-50%,0);}
+}
+
+
+
+
+
+
+
+
+

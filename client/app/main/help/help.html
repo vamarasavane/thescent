@@ -1,0 +1,88 @@
+<div ng-controller="HelpCtrl">
+
+
+
+
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+    <div class="thescent-header mdl-layout__header mdl-layout__header--waterfall">
+      <div class="mdl-layout__header-row">
+          <span class="thescent-title mdl-layout-title">
+            <a href="/"><img class="thescent-logo-image" src="assets/images/logo_2015_black.png"></a>
+          </span>
+        <!-- Add spacer, to align navigation to the right in desktop -->
+        <div class="thescent-header-spacer mdl-layout-spacer"></div>
+
+        <div class="thescent-navigation-container">
+
+          <nav class="thescent-navigation mdl-navigation">
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/search">search</a>
+            <a class="mdl-navigation__link mdl-typography--text-lowercase" href="/help">help</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <div class="thescent-content mdl-layout__content">
+      <a name="top"></a>
+      <div class="thescent-be-together-section mdl-typography--text-center">
+        <div class="thescent-font thescent-slogan">help</div>
+        <div class="thescent-font thescent-sub-slogan">
+          {{message}}
+          <br/>
+          <br/>
+        </div>
+
+
+
+
+
+        <a target="_self" href="http://www.sismodesign.com">
+          <button class="thescent-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+            <i class="material-icons">
+
+
+            </i>
+          </button>
+        </a>
+      </div>
+      <div class="thescent-more-section">
+        <div class="thescent-section-title mdl-typography--display-1-color-contrast">
+
+
+
+        </div>
+        <div class="thescent-card-container mdl-grid">
+        </div>
+      </div>
+
+      <footer class="mdl-mega-footer">
+        <div class="mdl-mega-footer--middle-section">
+
+          <div class="mdl-mega-footer--drop-down-section">
+            <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+            <h1 class="mdl-mega-footer--heading">COMPANY</h1>
+            <ul class="mdl-mega-footer--link-list">
+              <li><a href="/about">About</a></li>
+              <li><a href="/terms">Terms</a></li>
+              <li><a href="/partners">Partners</a></li>
+            </ul>
+          </div>
+
+
+        </div>
+
+        <div class="mdl-mega-footer--bottom-section">
+          <div class="mdl-logo">© 2015 sismodesign</div>
+
+        </div>
+
+      </footer>
+    </div>
+  </div>
+  <a href="/admin" target="_self" id="view-source"
+     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">backoffice</a>
+
+
+
+</div>
